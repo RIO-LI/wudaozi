@@ -1,5 +1,6 @@
 import { Shapes, ThumbShapes, DesignerShapes } from './shapes-types.js';
 import { Utils } from './utils.js';
+import { ShapeControl } from './shape-control.js';
 
 const initSidebarShapes = () => {
     const $panel = $('#panel_basic');
@@ -40,6 +41,8 @@ const initShapeThumbPreViewEvent = () => {
     });
 };
 
+
+
 const initDrapShapeToDesignerViewport = () => {
     $(document).on('mousedown', '.panel_box', (e) => {
         const $canvasContainer = $('#canvas_container');
@@ -79,6 +82,27 @@ const initDrapShapeToDesignerViewport = () => {
             hasSacle = false;
             $(document).off('mouseup', stopMove);
             console.log(e.clientX, e.clientY);
+            $container.hide();
+            const config = Object.assign({}, DesignerShapes[type]);
+            config.width = config.width || 50;
+            config.height = config.height || 50;
+            config.radius = config.radius || 0;
+            const $div = $('<div>');
+            const $canvas = $(`<canvas width="90" height="90">`);
+            $div.css({
+                position: 'absolute',
+                left: e.clientX - 149,
+                top: e.clientY,
+                border: '1px solid yellow',
+                width: 90,
+                height: 90
+            });
+            $div.append($canvas).appendTo($designer);
+            const fc = new fabric.StaticCanvas($canvas.get(0));
+            fc.clear();
+            fc.add(new fabric[type]({
+                ...config
+            }));
         };
         $(document).on('mouseup', stopMove);
         $(document).on('mousemove', move);
@@ -103,6 +127,10 @@ const main = () => {
     initSidebarShapes();
     initDesignerViewport();
     initEvents();
+
+    new ShapeControl({
+        selector: '#designer_layout'
+    });
 }
 
 main();
