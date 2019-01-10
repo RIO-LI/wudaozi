@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>吴道子流程图画板</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="./css/wudaozi.css">
 </head>
 
@@ -12,36 +15,24 @@
         <!-- begin图形选取区 -->
         <div id="shape_panel">
             <div class="panel_container">
-                <div id="panel_basic" class="content"></div>
+                <button>保存</button>
+                <br>
+                <button data-type='begin' data-action='add'>开始</button>
+                <button data-type='common' data-action='add'>普通</button>
+                <button data-type='end' data-action='add'>结束</button>
             </div>
         </div>
         <!-- end图形选取区 -->
         <!-- begin图形绘制区 -->
         <div id="designer_viewport">
-            <div id="designer_layout">
-                <div id="canvas_container">
-                </div>
+            <div id="canvas_container">
             </div>
-            <!-- begin图形选取预览 -->
-            <div id="shape_thumb" class="menu" data-current="" style="display: none">
-                <canvas width="180" height="90"></canvas>
-                <div class="js-text"></div>
-            </div>
-            <!-- end图形选取预览 -->
         </div>
         <!-- end图形绘制区 -->
-
-        <!-- begin图形选取拖拽预览区 -->
-        <div id="creating_shape_container" style="left: 0px;top: 0px;width: 500px;height: 500px; ">
-            <canvas id="creating_shape_canvas" width="500" height="500">
-            </canvas>
-        </div>
-        <!-- end图形选取拖拽预览区 -->
     </div>
-    <script src="./lib/fabricjs/fabric.js"></script>
     <script src="./lib/jquery/jquery.js"></script>
-    <script src="./lib/draggable/draggable.js"></script>
-    <script src="./js/wudaozi.js" type="module"></script>
+    <script src="./lib/jsplumb/jsplumb.js"></script>
+    <script src="./js/wudaozi.js"></script>
 </body>
 
 </html>
