@@ -389,15 +389,15 @@
         getAllNodesData: function () {
             return [].slice.call(this.$designer.find('.shape_node').map((index, item) => {
                 var $item = $(item);
-                var offset = $item.offset();
+                var position = $item.position();
                 var width = $item.width();
                 var height = $item.height();
                 var id = $item.attr('id');
                 var type = $item.attr('data-type');
                 var name = $item.find('[data-role="content"]').text() || '';
                 return {
-                    left: offset.left,
-                    top: offset.top,
+                    left: position.left,
+                    top: position.top,
                     width: width,
                     height: height,
                     id: id,
