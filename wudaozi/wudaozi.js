@@ -1,4 +1,39 @@
 ; $(function () {
+
+    function flattenDownDepth(array, result, depth) {
+        depth--
+        for (var i = 0;i < array.length;i++) {
+            var value = array[i]
+
+            if (depth > -1 && Array.isArray(value)) {
+                flattenDownDepth(value, result, depth)
+            } else {
+                result.push(value)
+            }
+        }
+
+        return result
+    }
+
+    function flattenFromDepth(array, depth) {
+        if (typeof depth !== 'number') {
+            throw new TypeError('Expected the depth to be a number')
+        }
+
+        return flattenDownDepth(array, [], depth)
+    }
+
+    function flattenDepth(array, depth) {
+        if (!Array.isArray(array)) {
+            throw new TypeError('Expected value to be an array')
+        }
+
+        return flattenFromDepth(array, depth)
+    }
+
+
+
+
     var uuid = 0;
     var hasInit = false;
     var Toolkit = {
@@ -346,6 +381,27 @@
         addLine: function (desc) {
             jsPlumb.connect({ uuids: [desc.from, desc.to] });
             return this;
+        },
+        /**
+         * 获取所有链接线的数据
+         * @returns {Array<{from: string, to: string}>}
+         */
+        getLinesData: function () {
+            var data = (jsPlumb.getAllConnections() || []).map(function (connection) {
+                if (connection && connection.endpoints) {
+
+                    return connection.endpoints || [];
+                }
+                return [];
+            }).map(function (endpoints) {
+                var fromAnchor = endpoints[0]['anchor'];
+                var toAnchor = endpoints[1]['anchor'];
+                return {
+                    from: fromAnchor.elementId + '_' + fromAnchor.type,
+                    to: toAnchor.elementId + '_' + toAnchor.type
+                };
+            });
+            return data;
         },
         /**
          * 获取选择器对应的元素的几何信息
