@@ -383,10 +383,34 @@
             return this;
         },
         /**
+         * 获取所有节点的数据
+         * @returns {Array<{left: number, top: number, width: number, height:number, type: string, name: string}>}
+         */
+        getAllNodesData: function () {
+            return [].slice.call(this.$designer.find('.shape_node').map((index, item) => {
+                var $item = $(item);
+                var offset = $item.offset();
+                var width = $item.width();
+                var height = $item.height();
+                var id = $item.attr('id');
+                var type = $item.attr('data-type');
+                var name = $item.find('[data-role="content"]').text() || '';
+                return {
+                    left: offset.left,
+                    top: offset.top,
+                    width: width,
+                    height: height,
+                    id: id,
+                    type: type,
+                    name: name
+                }
+            }));
+        },
+        /**
          * 获取所有链接线的数据
          * @returns {Array<{from: string, to: string}>}
          */
-        getLinesData: function () {
+        getAllLinesData: function () {
             var data = (jsPlumb.getAllConnections() || []).map(function (connection) {
                 if (connection && connection.endpoints) {
 
