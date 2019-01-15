@@ -31,18 +31,84 @@
         return flattenFromDepth(array, depth)
     }
 
-
+    // 右键菜单对象
+    var ContextMenu = {
+        _cacheId: null,
+        _sourceId: null,
+        _targetId: null,
+        _show: false,
+        menuTemplate: '<ul class="context-menu-list"></ul>',
+        menuItemTemplate: '<li class="context-menu-item"><span class="context-menu-item-icon glyphicon"></span><span class="context-menu-item-text"></span></li>',
+        /**
+         * 根据配置渲染右键菜单内容
+         * @param {{el: string, menus: Array<{text: string, id: string, action: Function,icon: string}>,data: any}} config 
+         */
+        render: function (settting) {
+            this.destroy();
+            var config = $.extend(true, {
+                position: {
+                    left: 0,
+                    top: 0
+                },
+                css: {
+                    munuItem: {
+                        height: 22,
+                        padding: 4
+                    }
+                }
+            }, settting);
+            var that = this;
+            var uuid = 'uuid_' + new Date().getTime();
+            this._cacheId = uuid;
+            var $menu = $(this.menuTemplate);
+            var $lis = [];
+            (config.menus || []).forEach(function (item) {
+                var icon = item.icon != null ? item.icon : 'glyphicon-list-alt';
+                var action = $.isFunction(item.action) ? item.action : $.noop;
+                var text = !$.isEmptyObject(item.text) ? item.text : '';
+                var id = !$.isEmptyObject(item.id) ? item.id : '';
+                var $li = $(that.menuItemTemplate);
+                $li.attr({ id: id }).css(config.css.munuItem);
+                $li.find('.context-menu-item-text').html(text);
+                $li.find('.context-menu-item-icon').addClass(icon);;
+                $li.on('click', function (event) {
+                    action(event, config.data)
+                });
+                $lis.push($li);
+            });
+            $menu
+                .attr({ id: uuid })
+                .css({
+                    left: config.position.left,
+                    top: config.position.top
+                })
+                .append($lis)
+                .appendTo($(config.el));
+            this._show = true;
+            return this;
+        },
+        destroy: function () {
+            this._show = false;
+            if (this._cacheId) {
+                $('#' + this._cacheId).hide().remove();
+            }
+        }
+    };
 
 
     var uuid = 0;
     var hasInit = false;
-    var Toolkit = {
+    var Wudaozi = {
+        // 邮件菜单管理者
+        contextMenu: ContextMenu,
         // 事件管理者
         eventManager: $({}),
         // 画图板jQuery DOM对象
         $designer: null,
         // Canvas网格 jQuery DOM对象
         $grids: null,
+        // 工具栏jQuery DOM对象
+        $toolbar: null,
         // jsPlumb对象缓存
         jsPlumb: null,
         // 当前选中的节点
@@ -59,44 +125,52 @@
             connectorPaintStyle: {
                 lineWidth: 2,
                 strokeStyle: '#ffff',
-                // joinstyle: 'round',
-                // fill: 'pink',
                 outlineColor: '',
                 outlineWidth: ''
             },
             // 鼠标悬浮在连接线上的样式
-            connectorHoverStyle: {
+            hoverPaintStyle: {
                 lineWidth: 2,
-                strokeStyle: 'red',
-                outlineWidth: 10,
-                outlineColor: ''
+                stroke: 'red',
+                strokeWidth: 2
             },
             // 链接线样式
             lineStyle: {
+                connectorStyle: {
+                    lineWidth: 2,
+                    strokeWidth: 3,
+                    stroke: '#61B7CF'
+                },
+                connectorHoverStyle: {
+                    lineWidth: 2,
+                    stroke: 'red',
+                    strokeWidth: 3
+                },
                 paintStyle: {
                     stroke: '#7AB02C',
                     fill: '#7AB02C',
                     radius: 6,
-                    lineWidth: 2
+                    lineWidth: 2,
+                    strokeWidth: 2
                 },
                 isSource: true, // 是否可以拖动（作为连线起点）
-                connector: ['Flowchart', { gap: 10, cornerRadius: 5, alwaysRespectStubs: true }],  // 连接线的样式种类有[Bezier],[Flowchart],[StateMachine ],[Straight ]
+                connector: ['Flowchart', { gap: 8, cornerRadius: 5, alwaysRespectStubs: true }],  // 连接线的样式种类有[Bezier],[Flowchart],[StateMachine ],[Straight ]
                 isTarget: true, // 是否可以放置（连线终点）
                 maxConnections: -1, // 设置连接点最多可以连接几条线
                 connectorOverlays: [
                     ['Arrow', {
-                        width: 10,
-                        length: 10,
+                        width: 20,
+                        length: 15,
                         location: 1
                     }],
                     ['Arrow', {
-                        width: 10,
-                        length: 10,
+                        width: 20,
+                        length: 15,
                         location: 0.2
                     }],
                     ['Arrow', {
-                        width: 10,
-                        length: 10,
+                        width: 20,
+                        length: 15,
                         location: 0.7
                     }]
                 ]
@@ -149,10 +223,11 @@
         init: function (config) {
             this.initConfig = $.extend(true, {}, config);
             this.$designer = $(this.initConfig.designer);
+            this.$toolbar = $(this.getField(this.initConfig, 'toolbar.el'));
             jsPlumb.setContainer(this.$designer.get(0));
             this.jsPlumb = jsPlumb;
             this.initDesignerViewport();
-            this.initEvent();
+            this._initEvent();
             return this;
         },
         /**
@@ -259,9 +334,9 @@
             }
         },
         /**
-         * 初始化绘图板的事件
+         * 初始化事件
          */
-        initEvent: function () {
+        _initEvent: function () {
             if (hasInit) {
                 return;
             }
@@ -280,44 +355,112 @@
             //         that.currentFocusNode = null;
             //     }
             // });
-            // 监听页面的动作控件，例如带有data-actio属性的新增、删除、保存等按钮
-            $(document)
-                .off('click', '[data-action]')
-                .on('click', '[data-action]', function (e) {
-                    var $target = $(e.target);
-                    var type = $target.attr('data-type') || 'common';
-                    var action = $target.attr('data-action') || 'add';
-                    that._crrentSelectToAddDetails = {
-                        type: type,
-                        action: action
-                    };
+
+            this._initToolbarEvent();
+
+            this._initDesignerEvent();
+            // 监听窗口的大小变化，及时跳转画布、网格的大小
+            $(window).resize(function () {
+                // TODO 算法还不够精确，待重构
+                that.resize();
+            });
+            return this;
+        },
+        /**
+         * 初始化绘图板事件
+         */
+        _initDesignerEvent: function () {
+            if (!this.$designer) {
+                return this;
+            }
+            var that = this;
+            // 禁止画图板的默认右键
+            this.$designer
+                .on("contextmenu", function () {
+                    return false;
                 });
             // 监听画板点击事件，如果存在已选中待添加的控件，往画板中新增该类型控件
             this.$designer
                 .on('click', function (e) {
+                    // 如果有右键菜单显示的话，将其销毁
+                    if (that.contextMenu._show) {
+                        that.contextMenu.destroy();
+                    }
                     if (!that._crrentSelectToAddDetails) {
                         return;
                     }
-                    var mousePos = that.getMousePos(e);
-                    var offset = that.getDesignerOffset();
+                    var mousePos = that.getDesignerMousePos(e);
                     that.addNode({
-                        left: mousePos.x - offset.left,
-                        top: mousePos.y - offset.top,
+                        left: mousePos.x,
+                        top: mousePos.y,
                         type: that._crrentSelectToAddDetails.type
                     });
                     that._crrentSelectToAddDetails = null;
                 });
             // 监听画板上对于形状控件双击点击事件
+            // TODO 目前没什么用，之后如果还有用要删除
             this.$designer
                 .on('dblclick', '.shape_node', function (e) {
                     var $target = $(e.currentTarget);
                     var data = $target.data('property');
                     that.nodeDoubleClickAction(e, data);
                 });
-            // 监听窗口的大小变化，及时跳转画布、网格的大小
-            $(window).resize(function () {
-                // TODO 算法还不够精确，待重构
-                that.resize();
+            // 监听画布节点的右键事件
+            this.$designer
+                .on('contextmenu', '.shape_node', function (event) {
+                    var config = that.initConfig;
+                    var eventPosition = that.getDesignerMousePos(event);
+                    that.contextMenu.render({
+                        el: that.getField(config, 'contextMenu.el', that.$designer),
+                        menus: that.getField(config, 'contextMenu.node', []),
+                        position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
+                        data: undefined // TODO 之后需要传递数据
+                    });
+                });
+            // 监听jsPlumb节点链接线jsPlumb的右键事件
+            jsPlumb.bind('contextmenu', function (component, event) {
+                // 当右键事件发生在连接线上时
+                if (component instanceof jsPlumb.Connection) {
+                    var pointsStart = component.endpoints[0];
+                    var pointsEnd = component.endpoints[1];
+                    var sourceId = '#' + pointsStart.anchor.elementId + '_' + pointsStart.anchor.type;
+                    var targetId = '#' + pointsEnd.anchor.elementId + '_' + pointsEnd.anchor.type;
+                    var eventPosition = that.getDesignerMousePos(event);
+                    var config = that.initConfig;
+                    that.contextMenu._sourceId = sourceId;
+                    that.contextMenu._targetId = targetId;
+                    that.contextMenu.render({
+                        el: that.getField(config, 'contextMenu.el', that.$designer),
+                        menus: that.getField(config, 'contextMenu.line', []),
+                        position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
+                        data: undefined // TODO 之后需要传递数据
+                    });
+                }
+            });
+            return this;
+        },
+        /**
+         * 初始化工具栏事件
+         */
+        _initToolbarEvent: function () {
+            if (!this.$toolbar) {
+                return this;
+            }
+            var that = this;
+            // 监听工具栏的动作控件，例如带有data-actio属性的新增、删除、保存等按钮
+            this.$toolbar.each(function (index, el) {
+                $(el).off('click', '[data-action]')
+                    .on('click', '[data-action]', function (e) {
+                        var $target = $(e.target);
+                        var type = $target.attr('data-type') || 'common';
+                        var action = $target.attr('data-action') || 'add';
+                        that._crrentSelectToAddDetails = {
+                            type: type,
+                            action: action
+                        };
+                        var fn = that.getField(that.initConfig, 'toolbar.actions.' + action, function () { });
+                        fn.apply(that, [e, that]);
+                    });
             });
             return this;
         },
@@ -347,6 +490,16 @@
          */
         getDesignerOffset: function () {
             return this.$designer != null ? this.$designer.offset() : { left: 0, top: 0 };
+        },
+        /**
+         * 根据事件对象，获取事件对象发生的画图板位置坐标系
+         * @param {Event} event 
+         * @returns {x: number, y: number}
+         */
+        getDesignerMousePos: function (event) {
+            var mousePos = this.getMousePos(event);
+            var offset = this.getDesignerOffset();
+            return { x: mousePos.x - offset.left, y: mousePos.y - offset.top };
         },
         /**
          * 根据事件对象，获取事件对象发生的位置坐标系
@@ -397,7 +550,7 @@
                 return true;
                 // }
             }).forEach(function (direction) {
-                var config = $.extend(true, {}, this.visoConfig.lineStyle);
+                var config = $.extend(true, this.visoConfig.lineStyle);
                 if (desc.type == 'end') {
                     config.isSource = false;
                 }
@@ -416,7 +569,9 @@
          * @param {{from: string, to: string}} desc 数据描述对象 
          */
         addLine: function (desc) {
-            jsPlumb.connect({ uuids: [desc.from, desc.to] });
+            jsPlumb.connect({
+                uuids: [desc.from, desc.to]
+            });
             return this;
         },
         /**
@@ -505,7 +660,14 @@
                 if (obj == null) {
                     return null || undefined;
                 } else {
-                    return obj[field] != null ? obj[field] : defaultValue;
+                    try {
+                        var result = field.split('.').reduce(function (prev, currKey) {
+                            return prev[currKey];
+                        }, obj);
+                        return result != null ? result : defaultValue;
+                    } catch (e) {
+                        return defaultValue;
+                    }
                 }
             } catch (e) {
                 return defaultValue;
@@ -527,5 +689,5 @@
             return this;
         }
     };
-    window.Toolkit = Toolkit;
+    window.Wudaozi = Wudaozi;
 });

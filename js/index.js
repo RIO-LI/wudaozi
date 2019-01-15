@@ -11,8 +11,63 @@ $(function () {
             url: 'test/data.json?' + new Date().getTime()
         }).then(function (data) {
             console.log(data);
-            Toolkit.init({
+            Wudaozi.init({
                 designer: '#designer_viewport',
+                toolbar: {
+                    el: '#shape_panel',
+                    actions: {
+                        remove: function (event, ctx) {
+                            console.info(event, ctx);
+                        },
+                        add: function (event, ctx) {
+                            console.warn(this);
+                        }
+                    }
+                },
+                contextMenu: {
+                    node: [{
+                        text: '文本A', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
+
+                            console.log(event, data);
+                        }
+                    }, {
+                        text: '文本B', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
+
+                            alert(1);
+                        }
+                    }, {
+                        text: '文本C', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
+
+                            alert(1);
+                        }
+                    }, {
+                        text: '文本D', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
+
+                            alert(1);
+                        }
+                    }],
+                    line: [{
+                        text: '文本2', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
+
+                            console.log(event, data);
+                        }
+                    }, {
+                        text: '文本1', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
+
+                            alert(1);
+                        }
+                    }, {
+                        text: '文本1', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
+
+                            alert(1);
+                        }
+                    }, {
+                        text: '文本1', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
+
+                            alert(1);
+                        }
+                    }]
+                },
                 data: data.root,
                 nodeDoubleClickAction: function (...args) {
                     console.log(args);

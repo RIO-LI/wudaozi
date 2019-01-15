@@ -8,7 +8,39 @@
     cursor: pointer;
 }
 
-/*  让连线支持事件*/
-/* .jtk-connector path:first-child {
-    pointer-events: all;
-} */
+/* begin 右键菜单样式 */
+.context-menu-list {
+    position: absolute;
+    display: inline-block;
+    min-width: 182px;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    list-style-type: none;
+    background: #fff;
+    border: 1px solid #bebebe;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+
+.context-menu-item {
+    position: relative;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    /* padding: 4px; */
+    color: #2f2f2f;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.context-menu-item:hover {
+    background-color: #eee;
+}
+
+/* end 右键菜单样式 */
