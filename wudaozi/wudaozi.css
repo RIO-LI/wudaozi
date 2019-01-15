@@ -1,0 +1,14 @@
+/* 绘图板 */
+#designer {
+    position: relative;
+}
+
+/* 让连线鼠标悬浮时出现一只小手*/
+.jtk-connector:hover {
+    cursor: pointer;
+}
+
+/*  让连线支持事件*/
+/* .jtk-connector path:first-child {
+    pointer-events: all;
+} */

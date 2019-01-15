@@ -37,13 +37,21 @@
     var uuid = 0;
     var hasInit = false;
     var Toolkit = {
+        // 事件管理者
         eventManager: $({}),
+        // 画图板jQuery DOM对象
         $designer: null,
+        // Canvas网格 jQuery DOM对象
+        $grids: null,
+        // jsPlumb对象缓存
         jsPlumb: null,
+        // 当前选中的节点
         currentFocusNode: null,
+        // 当前选择待添加的信息详情
         _crrentSelectToAddDetails: null,
         // 初始化时的配置
         initConfig: null,
+        // 初始化绘图的数据
         data: null,
         // jsPlumb可视化配置对象
         visoConfig: {
@@ -135,7 +143,7 @@
             }
         },
         /**
-         * 初始化吴道子绘图板
+         * 初始化绘图板
          * @param {Object} config 配置对象
          */
         init: function (config) {
@@ -156,7 +164,6 @@
             if (!data) {
                 return this;
             }
-            console.table(data);
             var that = this;
             var nodes = data.nodes || [];
             var lines = data.lines || [];
@@ -194,6 +201,7 @@
                 height: height
             }).hide();
             $drawContainer.append($canvas);
+            this.$grids = $canvas;
             this.drawGrid($('#designer_grids').get(0), width, height);
             $canvas.show();
             this.initConfig && this.initConfig.data && this.renderDesignerViewport(this.initConfig.data);
@@ -216,6 +224,8 @@
             } else {
                 _ctx = ctx;
             }
+            _ctx._drawWidth = w;
+            _ctx._drawHeight = h;
             _ctx.beginPath();
             for (var x = 0.5;x < w;x += step) {
                 _ctx.moveTo(x, 0);
@@ -230,6 +240,23 @@
             _ctx.strokeStyle = strokeStyle;
             _ctx.stroke();
             return this;
+        },
+        /**
+         * 重新调整画图板大小
+         */
+        resize: function () {
+            if (this.$grids && this.$grids.length > 0) {
+                var gridsEl = this.$grids.get(0);
+                var ctx = gridsEl.getContext('2d');
+                var width = this.$designer.width();
+                var height = document.documentElement.clientHeight;
+                this.$grids.attr({
+                    width: width,
+                    height: height
+                })
+                ctx.clearRect(0, 0, ctx._drawWidth, ctx._drawHeight);
+                this.drawGrid(ctx, width, height);
+            }
         },
         /**
          * 初始化绘图板的事件
@@ -285,15 +312,25 @@
                 .on('dblclick', '.shape_node', function (e) {
                     var $target = $(e.currentTarget);
                     var data = $target.data('property');
-                    that.shapeNodeDoubleClickAction(e, data);
+                    that.nodeDoubleClickAction(e, data);
                 });
+            // 监听窗口的大小变化，及时跳转画布、网格的大小
+            $(window).resize(function () {
+                // TODO 算法还不够精确，待重构
+                that.resize();
+            });
             return this;
         },
-        shapeNodeDoubleClickAction: function (event, data) {
+        /**
+         * 画图板上节点双击时的事件动作
+         * @param {jQuery.Event} event 事件对象
+         * @param {any} data 事件需要传播的数据
+         */
+        nodeDoubleClickAction: function (event, data) {
             if (this.initConfig && this.initConfig.shapeNodeDoubleClickAction) {
                 this.initConfig.shapeNodeDoubleClickAction(event, data, this);
             }
-            this.trigger('shape-node-double-click', event, data, this);
+            this.trigger('node-double-click', event, data, this);
             return this;
         },
         /**
@@ -426,6 +463,13 @@
                 };
             });
             return data;
+        },
+        /**
+         * 获取当前状态的数据
+         * @returns {lines: Array, nodes: Array}
+         */
+        getAllData: function () {
+            return $.extend(true, {}, this.initConfig.data, { nodes: this.getAllNodesData(), lines: this.getAllLinesData() });
         },
         /**
          * 获取选择器对应的元素的几何信息

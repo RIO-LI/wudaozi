@@ -1,9 +1,12 @@
 $(function () {
     var main = function () {
         var $shapePanel = $('#shape_panel');
-        $shapePanel.css({
-            height: document.documentElement.clientHeight
-        });
+
+        $(window).resize(function () {
+            $shapePanel.css({
+                height: document.documentElement.clientHeight
+            });
+        }).trigger('resize');
         $.ajax({
             url: 'test/data.json?' + new Date().getTime()
         }).then(function (data) {
@@ -11,7 +14,7 @@ $(function () {
             Toolkit.init({
                 designer: '#designer_viewport',
                 data: data.root,
-                shapeNodeDoubleClickAction: function (...args) {
+                nodeDoubleClickAction: function (...args) {
                     console.log(args);
                 }
             });
