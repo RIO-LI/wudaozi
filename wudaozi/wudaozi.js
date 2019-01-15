@@ -34,8 +34,6 @@
     // 右键菜单对象
     var ContextMenu = {
         _cacheId: null,
-        _sourceId: null,
-        _targetId: null,
         _show: false,
         menuTemplate: '<ul class="context-menu-list"></ul>',
         menuItemTemplate: '<li class="context-menu-item"><span class="context-menu-item-icon glyphicon"></span><span class="context-menu-item-text"></span></li>',
@@ -423,17 +421,18 @@
                 if (component instanceof jsPlumb.Connection) {
                     var pointsStart = component.endpoints[0];
                     var pointsEnd = component.endpoints[1];
-                    var sourceId = '#' + pointsStart.anchor.elementId + '_' + pointsStart.anchor.type;
-                    var targetId = '#' + pointsEnd.anchor.elementId + '_' + pointsEnd.anchor.type;
+                    var sourceId = pointsStart.anchor.elementId + '_' + pointsStart.anchor.type;
+                    var targetId = pointsEnd.anchor.elementId + '_' + pointsEnd.anchor.type;
                     var eventPosition = that.getDesignerMousePos(event);
                     var config = that.initConfig;
-                    that.contextMenu._sourceId = sourceId;
-                    that.contextMenu._targetId = targetId;
                     that.contextMenu.render({
                         el: that.getField(config, 'contextMenu.el', that.$designer),
                         menus: that.getField(config, 'contextMenu.line', []),
                         position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
-                        data: undefined // TODO 之后需要传递数据
+                        data: {
+                            sourceId: sourceId,
+                            targetId: targetId
+                        }
                     });
                 }
             });
@@ -543,13 +542,7 @@
                 id: id,
                 'data-id': id
             }).appendTo(this.$designer);
-            ['Top', 'Bottom', 'Left', 'Right'].filter(function (direction) {
-                // if (desc.type == 'start' || desc.type == 'end') {
-                //     return direction == 'Bottom';
-                // } else {
-                return true;
-                // }
-            }).forEach(function (direction) {
+            ['Top', 'Bottom', 'Left', 'Right'].forEach(function (direction) {
                 var config = $.extend(true, this.visoConfig.lineStyle);
                 if (desc.type == 'end') {
                     config.isSource = false;
@@ -572,6 +565,32 @@
             jsPlumb.connect({
                 uuids: [desc.from, desc.to]
             });
+            return this;
+        },
+        /**
+         * 根据数据描述对象删除链接线
+         * @param {{from: string, to: string}} desc 数据描述对象 
+         */
+        deleteLine: function (desc) {
+            var connector = (jsPlumb.getAllConnections() || []).map(function (connection) {
+                if (connection && connection.endpoints) {
+
+                    return connection.endpoints || [];
+                }
+                return [];
+            }).filter(function (endpoints) {
+                var fromAnchor = endpoints[0]['anchor'];
+                var toAnchor = endpoints[1]['anchor'];
+                var fromAnchorId = fromAnchor.elementId + '_' + fromAnchor.type;
+                var toAnchorId = toAnchor.elementId + '_' + toAnchor.type;
+                return desc.from == fromAnchorId && desc.to == toAnchorId;
+            });
+            if (connector.length > 0) {
+                var ctr = connector[0];
+                if (ctr[0]['connections'][0] == ctr[1]['connections'][0]) {
+                    jsPlumb.deleteConnection(ctr[0]['connections'][0]);
+                }
+            }
             return this;
         },
         /**
