@@ -47,8 +47,8 @@ $(function () {
                         }
                     }],
                     line: [{
-                        text: '文本2', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
-
+                        text: '删除', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
+                            Wudaozi.deleteLine(data)
                             console.log(event, data);
                         }
                     }, {

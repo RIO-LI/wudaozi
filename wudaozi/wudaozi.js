@@ -430,8 +430,8 @@
                         menus: that.getField(config, 'contextMenu.line', []),
                         position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
                         data: {
-                            sourceId: sourceId,
-                            targetId: targetId
+                            from: sourceId,
+                            to: targetId
                         }
                     });
                 }
