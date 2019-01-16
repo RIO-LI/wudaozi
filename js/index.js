@@ -26,8 +26,8 @@ $(function () {
                 },
                 contextMenu: {
                     node: [{
-                        text: '文本A', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
-
+                        text: '删除', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
+                            this.deleteNode(data.id);
                             console.log(event, data);
                         }
                     }, {
@@ -48,7 +48,7 @@ $(function () {
                     }],
                     line: [{
                         text: '删除', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
-                            Wudaozi.deleteLine(data)
+                            this.deleteLine(data)
                             console.log(event, data);
                         }
                     }, {

@@ -70,7 +70,7 @@
                 $li.find('.context-menu-item-text').html(text);
                 $li.find('.context-menu-item-icon').addClass(icon);;
                 $li.on('click', function (event) {
-                    action(event, config.data)
+                    action.apply(Wudaozi, [event, config.data]);
                 });
                 $lis.push($li);
             });
@@ -408,11 +408,16 @@
                 .on('contextmenu', '.shape_node', function (event) {
                     var config = that.initConfig;
                     var eventPosition = that.getDesignerMousePos(event);
+                    var $target = $(event.target);
+                    var $el = $target.parent();
                     that.contextMenu.render({
                         el: that.getField(config, 'contextMenu.el', that.$designer),
                         menus: that.getField(config, 'contextMenu.node', []),
                         position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
-                        data: undefined // TODO 之后需要传递数据
+                        data: {
+                            id: $el.prop('id'),
+                            element: $el.get(0)
+                        }
                     });
                 });
             // 监听jsPlumb节点链接线jsPlumb的右键事件
@@ -555,6 +560,14 @@
             jsPlumb.draggable($node.get(0), {
                 containment: 'parent'
             });
+            return this;
+        },
+        /**
+         * 删除节点元素
+         * @param {string} id 节点元素的ID
+         */
+        deleteNode: function (id) {
+            jsPlumb.remove(id);
             return this;
         },
         /**
