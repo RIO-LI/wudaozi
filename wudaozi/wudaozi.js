@@ -228,6 +228,12 @@
             this._initEvent();
             return this;
         },
+        extends: function () {
+            var params = [true, this];
+            params = params.concat([].slice.call(arguments));
+            $.extend.apply($, params);
+            return this;
+        },
         /**
          * 根据数据渲染画图板中的内容
          * @param {{lines: Array, nodes: Array}} data 渲染数据
@@ -339,20 +345,6 @@
                 return;
             }
             var that = this;
-            // $(document).on('click', function (e) {
-            //     var $target = $(e.target);
-            //     if ($target.hasClass('shape_node')) {
-            //         if (that.currentFocusNode) {
-            //             that.hideEndPoints(that.currentFocusNode);
-            //             that.currentFocusNode = null;
-            //         }
-            //         that.showEndPoints($target);
-            //         that.currentFocusNode = e.target;
-            //     } else {
-            //         that.hideEndPoints(that.currentFocusNode);
-            //         that.currentFocusNode = null;
-            //     }
-            // });
 
             this._initToolbarEvent();
 
@@ -406,33 +398,44 @@
             // 监听画布节点的右键事件
             this.$designer
                 .on('contextmenu', '.shape_node', function (event) {
+                    if (!that.contextMenu) {
+                        return;
+                    }
                     var config = that.initConfig;
                     var eventPosition = that.getDesignerMousePos(event);
                     var $target = $(event.target);
                     var $el = $target.parent();
-                    that.contextMenu.render({
-                        el: that.getField(config, 'contextMenu.el', that.$designer),
-                        menus: that.getField(config, 'contextMenu.node', []),
-                        position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
-                        data: {
-                            id: $el.prop('id'),
-                            element: $el.get(0)
-                        }
-                    });
+                    var nodeMenus = that.getField(config, 'contextMenu.node', []);
+
+                    if (nodeMenus.length > 0) {
+                        that.contextMenu.render({
+                            el: that.getField(config, 'contextMenu.el', that.$designer),
+                            menus: that.getField(config, 'contextMenu.node', []),
+                            position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
+                            data: {
+                                id: $el.prop('id'),
+                                element: $el.get(0)
+                            }
+                        });
+                    }
                 });
             // 监听jsPlumb节点链接线jsPlumb的右键事件
             jsPlumb.bind('contextmenu', function (component, event) {
+                if (!that.contextMenu) {
+                    return;
+                }
+                var config = that.initConfig;
+                var lineMenus = that.getField(config, 'contextMenu.line', []);
                 // 当右键事件发生在连接线上时
-                if (component instanceof jsPlumb.Connection) {
+                if (component instanceof jsPlumb.Connection && lineMenus.length > 0) {
                     var pointsStart = component.endpoints[0];
                     var pointsEnd = component.endpoints[1];
                     var sourceId = pointsStart.anchor.elementId + '_' + pointsStart.anchor.type;
                     var targetId = pointsEnd.anchor.elementId + '_' + pointsEnd.anchor.type;
                     var eventPosition = that.getDesignerMousePos(event);
-                    var config = that.initConfig;
                     that.contextMenu.render({
                         el: that.getField(config, 'contextMenu.el', that.$designer),
-                        menus: that.getField(config, 'contextMenu.line', []),
+                        menus: lineMenus,
                         position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
                         data: {
                             from: sourceId,
