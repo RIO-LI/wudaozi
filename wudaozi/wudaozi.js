@@ -70,7 +70,7 @@
                 $li.find('.context-menu-item-text').html(text);
                 $li.find('.context-menu-item-icon').addClass(icon);;
                 $li.on('click', function (event) {
-                    action.apply(Wudaozi, [event, config.data]);
+                    action.apply(null, [event, Wudaozi, config.data]);
                 });
                 $lis.push($li);
             });
@@ -98,7 +98,7 @@
     var hasInit = false;
     var Wudaozi = {
         // 邮件菜单管理者
-        contextMenu: ContextMenu,
+        $$contextMenu: ContextMenu,
         // 事件管理者
         eventManager: $({}),
         // 画图板jQuery DOM对象
@@ -228,10 +228,17 @@
             this._initEvent();
             return this;
         },
-        extends: function () {
-            var params = [true, this];
-            params = params.concat([].slice.call(arguments));
-            $.extend.apply($, params);
+        /**
+         * 注册插件
+         * @param {string} name 插件对象的名称，注册成功之后会在Wudaozi对象下生成对应$${name}值的属性
+         * @param {object} pluginObject 拓展插件对象
+         */
+        plugin: function (name, pluginObject) {
+            if (typeof name !== 'string' && typeof pluginObject === 'object') {
+                return this;
+            }
+            pluginObject.W = this; // 在插件对象上挂载一个W属性，使之可以访问Wudaozi对象
+            this['$$' + name] = pluginObject
             return this;
         },
         /**
@@ -373,8 +380,8 @@
             this.$designer
                 .on('click', function (e) {
                     // 如果有右键菜单显示的话，将其销毁
-                    if (that.contextMenu._show) {
-                        that.contextMenu.destroy();
+                    if (that.$$contextMenu._show) {
+                        that.$$contextMenu.destroy();
                     }
                     if (!that._crrentSelectToAddDetails) {
                         return;
@@ -398,30 +405,31 @@
             // 监听画布节点的右键事件
             this.$designer
                 .on('contextmenu', '.shape_node', function (event) {
-                    if (!that.contextMenu) {
+                    if (!that.$$contextMenu) {
                         return;
                     }
                     var config = that.initConfig;
                     var eventPosition = that.getDesignerMousePos(event);
                     var $target = $(event.target);
-                    var $el = $target.parent();
+                    var $el = $target.hasClass('shape_node') ? $target : $target.parent();
                     var nodeMenus = that.getField(config, 'contextMenu.node', []);
 
                     if (nodeMenus.length > 0) {
-                        that.contextMenu.render({
+                        that.$$contextMenu.render({
                             el: that.getField(config, 'contextMenu.el', that.$designer),
                             menus: that.getField(config, 'contextMenu.node', []),
                             position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
                             data: {
                                 id: $el.prop('id'),
-                                element: $el.get(0)
+                                element: $el.get(0),
+                                desc: $el.data('desc')
                             }
                         });
                     }
                 });
             // 监听jsPlumb节点链接线jsPlumb的右键事件
             jsPlumb.bind('contextmenu', function (component, event) {
-                if (!that.contextMenu) {
+                if (!that.$$contextMenu) {
                     return;
                 }
                 var config = that.initConfig;
@@ -433,13 +441,14 @@
                     var sourceId = pointsStart.anchor.elementId + '_' + pointsStart.anchor.type;
                     var targetId = pointsEnd.anchor.elementId + '_' + pointsEnd.anchor.type;
                     var eventPosition = that.getDesignerMousePos(event);
-                    that.contextMenu.render({
+                    that.$$contextMenu.render({
                         el: that.getField(config, 'contextMenu.el', that.$designer),
                         menus: lineMenus,
                         position: that.getField(config, 'contextMenu.position', { left: eventPosition.x, top: eventPosition.y }),
                         data: {
                             from: sourceId,
-                            to: targetId
+                            to: targetId,
+                            desc: component.desc
                         }
                     });
                 }
@@ -466,13 +475,14 @@
                             action: action
                         };
                         var fn = that.getField(that.initConfig, 'toolbar.actions.' + action, function () { });
-                        fn.apply(that, [e, that]);
+                        fn.apply(null, [e, that]);
                     });
             });
             return this;
         },
         /**
          * 画图板上节点双击时的事件动作
+         * // TODO
          * @param {jQuery.Event} event 事件对象
          * @param {any} data 事件需要传播的数据
          */
@@ -539,6 +549,7 @@
             var $node = $(shape.template);
             var uuid = this.createUUID();
             var id = this.getField(desc, 'id', uuid);
+            $node.data('desc', desc);
             $node.addClass('shape_node');
             $node.find('[data-role="content"]').html(this.getField(desc, 'name', shape.defaultText));
             $node.css({
@@ -578,9 +589,12 @@
          * @param {{from: string, to: string}} desc 数据描述对象 
          */
         addLine: function (desc) {
-            jsPlumb.connect({
-                uuids: [desc.from, desc.to]
+            var connect = jsPlumb.connect({
+                uuids: [desc.from, desc.to],
+                desc: desc
             });
+            // 将描述数据挂载到链接组件对象上，以便于其他地方从链接组件对象上获取渲染时的数据
+            connect.desc = desc;
             return this;
         },
         /**

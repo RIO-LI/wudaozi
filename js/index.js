@@ -26,9 +26,9 @@ $(function () {
                 },
                 contextMenu: {
                     node: [{
-                        text: '删除', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
-                            this.deleteNode(data.id);
-                            console.log(event, data);
+                        text: '删除', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, ctx, data) {
+                            ctx.deleteNode(data.id);
+                            console.log(event, ctx, data);
                         }
                     }, {
                         text: '文本B', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
@@ -47,14 +47,13 @@ $(function () {
                         }
                     }],
                     line: [{
-                        text: '删除', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, data) {
-                            this.deleteLine(data)
-                            console.log(event, data);
+                        text: '删除', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, ctx, data) {
+                            ctx.deleteLine(data)
+                            console.log(event, ctx, data);
                         }
                     }, {
-                        text: '文本1', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
-
-                            alert(1);
+                        text: '编辑', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, ctx, data) {
+                            ctx.$$configProperty.show(data);
                         }
                     }, {
                         text: '文本1', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
@@ -68,10 +67,15 @@ $(function () {
                         }
                     }]
                 },
-                data: data.root,
-                nodeDoubleClickAction: function (...args) {
-                    console.log(args);
-                }
+                configProperty: {
+                    action: {
+                        show: function (...args) {
+                            console.log(args);
+                            console.log(this);
+                        }
+                    }
+                },
+                data: data.root
             });
         });
     };
