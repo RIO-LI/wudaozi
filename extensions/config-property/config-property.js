@@ -183,7 +183,21 @@
          * 更新相关节点或线的数据
          */
         updateData: function () {
-            return this.data.desc.properties = this.getAllTabsData();
+            var desc = this.$$w.getField(this.data, 'desc');
+            var id = this.$$w.getField(this.data, 'id');
+            var type = this.$$w.getField(desc, 'type');
+            this.data.desc.properties = this.getAllTabsData();
+            // 如果当前是‘线’的配置模态框
+            if (type === 'line') {
+                var component = this.$$w.getField(this.data, 'component');
+                if (component) {
+                    desc = $.extend(true, desc, this.data.desc);
+                    component.desc = desc;
+                }
+            } else {
+                var $el = $('#' + id);
+                $el.data('desc', $.extend(true, {}, desc, this.data.desc));
+            }
         },
         /**
          * 获取所有标签页的数据
@@ -201,7 +215,7 @@
                 var formId = $form.prop('id');
                 var groupId = formId.replace('-form', '');
                 var groupData = {
-                    id: groupId,
+                    groupId: groupId,
                     controls: that._getFormData('#' + formId)
                 };
                 allTabsData.push(groupData);

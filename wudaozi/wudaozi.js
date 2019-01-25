@@ -434,6 +434,16 @@
                         });
                     }
                 });
+            //监听jsPlumb节点链接时的事件
+            jsPlumb.bind('connection', function (info, originalEvent) {
+                var desc = {
+                    from: info.sourceId + '_' + info.sourceEndpoint.anchor.type,
+                    to: info.targetId + '_' + info.targetEndpoint.anchor.type,
+                    shapeConfig: that.getField(that, 'shapes.line'),
+                    type: 'line'
+                };
+                info.connection.desc = desc;
+            });
             // 监听jsPlumb节点链接线jsPlumb的右键事件
             jsPlumb.bind('contextmenu', function (component, event) {
                 if (!that.$$contextMenu) {
@@ -455,7 +465,8 @@
                         data: {
                             from: sourceId,
                             to: targetId,
-                            desc: component.desc
+                            desc: component.desc,
+                            component: component
                         }
                     });
                 }
@@ -638,6 +649,7 @@
          * @returns {Array<{left: number, top: number, width: number, height:number, type: string, name: string}>}
          */
         getAllNodesData: function () {
+            var that = this;
             return [].slice.call(this.$designer.find('.shape_node').map((index, item) => {
                 var $item = $(item);
                 var position = $item.position();
@@ -646,6 +658,7 @@
                 var id = $item.attr('id');
                 var type = $item.attr('data-type');
                 var name = $item.find('[data-role="content"]').text() || '';
+                var desc = $item.data('desc');
                 return {
                     left: position.left,
                     top: position.top,
@@ -653,7 +666,8 @@
                     height: height,
                     id: id,
                     type: type,
-                    name: name
+                    name: name,
+                    properties: that.getField(desc, 'properties', [])
                 }
             }));
         },
@@ -669,12 +683,7 @@
                 }
                 return [];
             }).map(function (endpoints) {
-                var fromAnchor = endpoints[0]['anchor'];
-                var toAnchor = endpoints[1]['anchor'];
-                return {
-                    from: fromAnchor.elementId + '_' + fromAnchor.type,
-                    to: toAnchor.elementId + '_' + toAnchor.type
-                };
+                return endpoints[0].connections[0].desc;
             });
             return data;
         },
