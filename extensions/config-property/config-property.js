@@ -15,7 +15,7 @@
                 </div>\
                 <div class="modal-footer">\
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>\
-                    <button type="button" class="btn btn-primary">保存</button>\
+                    <button type="button" class="btn btn-primary" data-action="save">保存</button>\
                 </div>\
             </div>\
         </div>\
@@ -108,26 +108,27 @@
     }
 
     W.plugin('configProperty', {
-        modal: null,
-        $$w: null,
+        // 模态框jQuery DOM 对象
+        $modal: null,
+        // 模态框关联的数据
         data: null,
-        init: function (w) {
-            console.log('配置插件开始初始化', w);
-        },
         /**
-         * 传入数据并展示
-         * @param {*} data 
+         * 初始化插件入口，将会在Wudaozi对象初始化完毕后调用
+         * @param {Wudaozi} w 
          */
-        show: function (data) {
-            var config = this.$$w.initConfig.configProperty;
+        init: function (w) {
+            if (this.$modal) {
+                return this;
+            }
+            var config = w.initConfig.configProperty;
             if (!config) {
                 return this;
             }
-            this.data = data;
             config = $.extend(true, {
                 modal: {
                     keyboard: false,
-                    backdrop: 'static'
+                    backdrop: 'static',
+                    show: false
                 },
                 action: {
                     show: $.noop,
@@ -135,16 +136,42 @@
                     hide: $.noop,
                     hidden: $.noop
                 }
-            }, this.$$w.initConfig.configProperty);
+            }, w.initConfig.configProperty);
+            this.$modal = $(modalTpl).appendTo('body').modal(config.modal);
+            this._initEvent();
+            return this;
+        },
+        /**
+         * 初始化一些事件
+         */
+        _initEvent: function () {
             if (!this.$modal) {
-                this.$modal = $(modalTpl).appendTo('body').modal(config.modal);
+                return this;
             }
+            var that = this;
+            this.$modal
+                .off('click', '[data-action="save"]')
+                .on('click', '[data-action="save"]', function (e) {
+                    that.updateData();
+                    that.hide();
+                });
+            return this;
+        },
+        /**
+         * 传入数据并展示模态框
+         * @param {*} data 
+         */
+        show: function (data) {
+            this.data = data;
             this.$modal.find('.modal-body').empty().append(createTab(data));
             bindAction(this, 'show');
             bindAction(this, 'shown');
             this.$modal.modal('show');
             return this;
         },
+        /**
+         * 关闭模态框
+         */
         hide: function () {
             this.data = null;
             bindAction(this, 'hide');
@@ -152,8 +179,34 @@
             this.$modal.modal('hide');
             return this;
         },
+        /**
+         * 更新相关节点或线的数据
+         */
         updateData: function () {
-            return this.data;
+            return this.data.desc.properties = this.getAllTabsData();
+        },
+        /**
+         * 获取所有标签页的数据
+         * @returns {Array<{id: string, controls:{[prop:string]: {value: any}}}>}
+         */
+        getAllTabsData: function () {
+            if (!this.$modal) {
+                return null;
+            }
+            var that = this;
+            var allTabsData = [];
+
+            this.$modal.find('form').each(function (index, form) {
+                var $form = $(form);
+                var formId = $form.prop('id');
+                var groupId = formId.replace('-form', '');
+                var groupData = {
+                    id: groupId,
+                    controls: that._getFormData('#' + formId)
+                };
+                allTabsData.push(groupData);
+            });
+            return allTabsData;
         },
         /**
          * @description 获取表单中所有数据对象
@@ -161,39 +214,42 @@
          * @param {string|HTMLFormElement|jQuery} form 目标表单元素或选择器
          * @returns {[key:string]: {value: any}} 数据对象
          */
-        getFormDatas: function (form) {
+        _getFormData: function (form) {
             var rCRLF = /\r?\n/g;
             var rsubmitterTypes = /^(?:submit|button|image|reset|file)$/i;
             var rsubmittable = /^(?:input|select|textarea|keygen)/i;
             var rcheckableType = (/^(?:checkbox|radio)$/i);
-            return $(form).map(function () {
-                // Can add propHook for "elements" to filter or add form elements
-                var elements = jQuery.prop(this, "elements");
-                return elements ? jQuery.makeArray(elements) : this;
-            }).filter(function () {
-                var type = this.type;
-                // 不获取带有 data-no-send为true的元素的值
-                if ($(this).attr('data-no-send') == "true") {
-                    return false;
-                }
-                return this.name &&
-                    rsubmittable.test(this.nodeName) && !rsubmitterTypes.test(type) && (this.checked || !rcheckableType.test(type));
-            }).map(function (i, elem) {
-                var val = jQuery(this).val();
-                if (val == null) {
-                    return null;
-                } else if (jQuery.isArray(val)) {
-                    return jQuery.map(val, function (val) {
+            return $(form)
+                .map(function () {
+                    // Can add propHook for "elements" to filter or add form elements
+                    var elements = jQuery.prop(this, "elements");
+                    return elements ? jQuery.makeArray(elements) : this;
+                })
+                .filter(function () {
+                    var type = this.type;
+                    // 不获取带有 data-no-send为true的元素的值
+                    if ($(this).attr('data-no-send') == "true") {
+                        return false;
+                    }
+                    return this.name &&
+                        rsubmittable.test(this.nodeName) && !rsubmitterTypes.test(type) && (this.checked || !rcheckableType.test(type));
+                })
+                .map(function (i, elem) {
+                    var val = jQuery(this).val();
+                    if (val == null) {
+                        return null;
+                    } else if (jQuery.isArray(val)) {
+                        return jQuery.map(val, function (val) {
+                            var obj = {};
+                            obj[elem.name] = { value: val.replace(rCRLF, "\r\n") };
+                            return obj;
+                        });
+                    } else {
                         var obj = {};
                         obj[elem.name] = { value: val.replace(rCRLF, "\r\n") };
                         return obj;
-                    });
-                } else {
-                    var obj = {};
-                    obj[elem.name] = { value: val.replace(rCRLF, "\r\n") };
-                    return obj;
-                }
-            })
+                    }
+                })
                 .get()
                 .reduce(function (prev, curr) {
                     return $.extend(prev, curr);
