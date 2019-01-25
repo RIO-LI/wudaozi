@@ -1,0 +1,175 @@
+{
+    "start": {
+        "properties": [
+            {
+                "groupId": "tab1",
+                "label": "标签1",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "name",
+                        "label": "名称",
+                        "type": "text"
+                    },
+                    {
+                        "id": "age",
+                        "label": "年龄",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "groupId": "tab2",
+                "label": "标签2",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "time",
+                        "label": "时间",
+                        "type": "text"
+                    },
+                    {
+                        "id": "city",
+                        "label": "城市",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    },
+    "people": {
+        "properties": [
+            {
+                "groupId": "tab1",
+                "label": "标签1",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "name",
+                        "label": "名称",
+                        "type": "text"
+                    },
+                    {
+                        "id": "age",
+                        "label": "年龄",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "groupId": "tab2",
+                "label": "标签2",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "time",
+                        "label": "时间",
+                        "type": "text"
+                    },
+                    {
+                        "id": "city",
+                        "label": "城市",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    },
+    "common": {
+        "properties": [
+            {
+                "groupId": "tab1",
+                "label": "标签1",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "name",
+                        "label": "名称",
+                        "type": "text"
+                    },
+                    {
+                        "id": "age",
+                        "label": "年龄",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "groupId": "tab2",
+                "label": "标签2",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "time",
+                        "label": "时间",
+                        "type": "text"
+                    },
+                    {
+                        "id": "city",
+                        "label": "城市",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    },
+    "end": {
+        "properties": [
+            {
+                "groupId": "tab1",
+                "label": "标签1",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "name",
+                        "label": "名称",
+                        "type": "text"
+                    },
+                    {
+                        "id": "age",
+                        "label": "年龄",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "groupId": "tab2",
+                "label": "标签2",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "time",
+                        "label": "时间",
+                        "type": "text"
+                    },
+                    {
+                        "id": "city",
+                        "label": "城市",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    },
+    "line": {
+        "properties": [
+            {
+                "groupId": "tab1",
+                "label": "标签1",
+                "type": "tab",
+                "controls": [
+                    {
+                        "id": "name",
+                        "label": "名称",
+                        "type": "text"
+                    },
+                    {
+                        "id": "execute",
+                        "label": "是否执行",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    }
+}

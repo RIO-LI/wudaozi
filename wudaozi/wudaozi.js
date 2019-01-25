@@ -1,36 +1,12 @@
 ; $(function () {
 
-    function flattenDownDepth(array, result, depth) {
-        depth--
-        for (var i = 0;i < array.length;i++) {
-            var value = array[i]
-
-            if (depth > -1 && Array.isArray(value)) {
-                flattenDownDepth(value, result, depth)
-            } else {
-                result.push(value)
-            }
-        }
-
-        return result
-    }
-
-    function flattenFromDepth(array, depth) {
-        if (typeof depth !== 'number') {
-            throw new TypeError('Expected the depth to be a number')
-        }
-
-        return flattenDownDepth(array, [], depth)
-    }
-
-    function flattenDepth(array, depth) {
-        if (!Array.isArray(array)) {
-            throw new TypeError('Expected value to be an array')
-        }
-
-        return flattenFromDepth(array, depth)
-    }
-
+    /**
+     * ========================================================================
+     * 
+     * 右键菜单编辑功能模块
+     * 
+     * ========================================================================
+     */
     // 右键菜单对象
     var ContextMenu = {
         _cacheId: null,
@@ -94,9 +70,20 @@
     };
 
 
+
+
+    /**
+   * ========================================================================
+   * 
+   * 画图板功能模块
+   * 
+   * ========================================================================
+   */
     var uuid = 0;
     var hasInit = false;
     var Wudaozi = {
+        // 插件缓存对象
+        plugins: {},
         // 邮件菜单管理者
         $$contextMenu: ContextMenu,
         // 事件管理者
@@ -184,7 +171,8 @@
                         </a>\
                     </div>\
                 ',
-                defaultText: '开始'
+                defaultText: '开始',
+                properties: []
             },
             common: {
                 template: '\
@@ -193,7 +181,8 @@
                         </a>\
                     </div>\
                 ',
-                defaultText: '节点'
+                defaultText: '节点',
+                properties: []
             },
             people: {
                 template: '\
@@ -202,7 +191,8 @@
                         </a>\
                     </div>\
                 ',
-                defaultText: '节点'
+                defaultText: '节点',
+                properties: []
             },
             end: {
                 template: '\
@@ -211,7 +201,8 @@
                         </a>\
                     </div>\
                 ',
-                defaultText: '结束'
+                defaultText: '结束',
+                properties: []
             }
         },
         /**
@@ -219,13 +210,16 @@
          * @param {Object} config 配置对象
          */
         init: function (config) {
-            this.initConfig = $.extend(true, {}, config);
+            this.initConfig = $.extend(true, {
+                shapes: this.shapes
+            }, config);
             this.$designer = $(this.initConfig.designer);
             this.$toolbar = $(this.getField(this.initConfig, 'toolbar.el'));
             jsPlumb.setContainer(this.$designer.get(0));
             this.jsPlumb = jsPlumb;
             this.initDesignerViewport();
             this._initEvent();
+            this._initPlugins();
             return this;
         },
         /**
@@ -237,8 +231,21 @@
             if (typeof name !== 'string' && typeof pluginObject === 'object') {
                 return this;
             }
-            pluginObject.W = this; // 在插件对象上挂载一个W属性，使之可以访问Wudaozi对象
-            this['$$' + name] = pluginObject
+            pluginObject.$$w = this; // 在插件对象上挂载一个$w属性，使之可以访问Wudaozi对象
+            this.plugins['$$' + name] = this['$$' + name] = pluginObject;
+            return this;
+        },
+        /**
+         * 初始化所有插件，调用插件的init方法
+         */
+        _initPlugins: function () {
+            var that = this;
+            Object.keys(this.plugins).forEach(function (pluginName) {
+                var initFn = that.getField(that, 'plugins.' + pluginName + '.init');
+                if ($.isFunction(initFn)) {
+                    initFn.apply(that.getField(that, 'plugins.' + pluginName), [that]);
+                }
+            });
             return this;
         },
         /**
@@ -549,6 +556,7 @@
             var $node = $(shape.template);
             var uuid = this.createUUID();
             var id = this.getField(desc, 'id', uuid);
+            desc.shapeConfig = this.getField(desc, 'shapeConfig', shape);
             $node.data('desc', desc);
             $node.addClass('shape_node');
             $node.find('[data-role="content"]').html(this.getField(desc, 'name', shape.defaultText));
@@ -589,6 +597,8 @@
          * @param {{from: string, to: string}} desc 数据描述对象 
          */
         addLine: function (desc) {
+            var shapeConfig = this.getField(this, 'shapes.line');
+            desc.shapeConfig = this.getField(desc, 'shapeConfig', shapeConfig);
             var connect = jsPlumb.connect({
                 uuids: [desc.from, desc.to],
                 desc: desc

@@ -1,3010 +1,508 @@
 {
-  "root": {
-    "id": "258",
-    "name": "借款申请单",
-    "flowNumb": "406",
-    "flowCreator": "system",
-    "flowCreateTime": "2018-03-19 14:25:55",
-    "isallowauthorize": "1",
-    "isAllowToRead": "1",
-    "bomid": "T_OR_BORROW",
-    "bomname": "借款申请单",
-    "count": "22",
-    "ordernumber": "9",
-    "nodes": [
-      {
-        "id": "uuid_1",
-        "name": "经办人",
-        "type": "start",
-        "shape": "img",
-        "number": "1",
-        "left": "103",
-        "top": "77",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "1"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "经办人"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "1"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "1"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input"
-          },
-          {
-            "id": "ideaField",
-            "text": "input"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span"
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input",
-            "value": "是否总经理,是否分管领导,是否部门经理 ,送董事长审批"
-          },
-          {
-            "id": "hiddenField",
-            "text": "input",
-            "value": "iszjl,isdgld,isbmjl,IsSendDSZ"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input",
-            "value": "标题,付款方式,币种,借款金额（小写）,借款原因,备注,附件,借款人签收,经办人意见,预计还款日期,申请人部门"
-          },
-          {
-            "id": "editField",
-            "text": "input",
-            "value": "bostitle,onlinepay,currency,borrow_amount,borrow_reason,remark,attach,receiver,jbrYJ,repay_date,orgid"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input",
-            "value": "标题,借款金额（小写）,借款原因,预计还款日期"
-          },
-          {
-            "id": "notNullField",
-            "text": "input",
-            "value": "bostitle,borrow_amount,borrow_reason,repay_date"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "uuid_2",
-        "name": "经办人所在部门经理审核",
-        "type": "people",
-        "shape": "img",
-        "number": "2",
-        "left": "256",
-        "top": "77",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "2"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "经办人所在部门经理审核"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "2"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "2"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input",
-            "value": "部门经理审核意见"
-          },
-          {
-            "id": "ideaField",
-            "text": "input",
-            "value": "bmjlshYJ"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span",
-            "value": {
-              "selectStyle": "NS31",
-              "memberName": "直接领导",
-              "memberNumb": "直接领导",
-              "isDefaultPar": "true"
+  "id": "258",
+  "name": "借款申请单",
+  "nodes": [
+    {
+      "id": "uuid_1",
+      "name": "经办人",
+      "type": "start",
+      "number": "1",
+      "left": "103",
+      "top": "77",
+      "width": "75",
+      "height": "70",
+      "properties": [
+        {
+          "groupId": "tab1",
+          "controls": {
+            "name": {
+              "value": "李维肖"
+            },
+            "age": {
+              "value": "23"
             }
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input",
-            "value": "是否总经理,是否分管领导,是否部门经理 ,送董事长审批"
-          },
-          {
-            "id": "hiddenField",
-            "text": "input",
-            "value": "iszjl,isdgld,isbmjl,IsSendDSZ"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input"
-          },
-          {
-            "id": "editField",
-            "text": "input"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input"
-          },
-          {
-            "id": "notNullField",
-            "text": "input"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
           }
-        ]
-      },
-      {
-        "id": "uuid_3",
-        "name": "财务审核",
-        "type": "people",
-        "shape": "img",
-        "number": "3",
-        "left": "408",
-        "top": "77",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "3"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "财务审核"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "2"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "3"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input",
-            "value": "财务审核意见"
-          },
-          {
-            "id": "ideaField",
-            "text": "input",
-            "value": "cwshYJ"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span",
-            "value": [
-              {
-                "selectStyle": "NS01",
-                "memberName": "张丽莎",
-                "memberNumb": "A760049012",
-                "isDefaultPar": "true"
-              },
-              {
-                "selectStyle": "NS01",
-                "memberName": "孙彦",
-                "memberNumb": "A594870971",
-                "isDefaultPar": "false"
-              }
-            ]
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input",
-            "value": "是否总经理,是否分管领导,是否部门经理 ,送董事长审批"
-          },
-          {
-            "id": "hiddenField",
-            "text": "input",
-            "value": "iszjl,isdgld,isbmjl,IsSendDSZ"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input",
-            "value": "标题,付款方式,预计还款日期,币种,备注,附件,财务审核意见,借款金额（小写）"
-          },
-          {
-            "id": "editField",
-            "text": "input",
-            "value": "bostitle,onlinepay,repay_date,currency,remark,attach,cwshYJ,borrow_amount"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input",
-            "value": "标题,预计还款日期,借款金额（小写）"
-          },
-          {
-            "id": "notNullField",
-            "text": "input",
-            "value": "bostitle,repay_date,borrow_amount"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "uuid_4",
-        "name": "分管副总审批",
-        "type": "people",
-        "shape": "img",
-        "number": "4",
-        "left": "408",
-        "top": "307",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "4"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "分管副总审批"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "2"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "5"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input",
-            "value": "分管副总审批意见"
-          },
-          {
-            "id": "ideaField",
-            "text": "input",
-            "value": "fgfzspYJ"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span",
-            "value": [
-              {
-                "selectStyle": "NS31",
-                "memberName": "分管领导",
-                "memberNumb": "分管领导",
-                "condition": "orgid != '99630768'",
-                "isDefaultPar": "false"
-              },
-              {
-                "selectStyle": "NS01",
-                "memberName": "车君",
-                "memberNumb": "A742417126",
-                "condition": "orgid == '99630768'",
-                "isDefaultPar": "false"
-              }
-            ]
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input",
-            "value": "是否总经理,是否分管领导,是否部门经理 "
-          },
-          {
-            "id": "hiddenField",
-            "text": "input",
-            "value": "iszjl,isdgld,isbmjl"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input",
-            "value": "分管副总审批意见"
-          },
-          {
-            "id": "editField",
-            "text": "input",
-            "value": "fgfzspYJ"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input"
-          },
-          {
-            "id": "notNullField",
-            "text": "input"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "uuid_5",
-        "name": "结束",
-        "type": "end",
-        "shape": "img",
-        "number": "5",
-        "left": "402",
-        "top": "605",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "5"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "结束"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "11"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "7"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input"
-          },
-          {
-            "id": "ideaField",
-            "text": "input"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span"
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input",
-            "value": "是否总经理,是否分管领导,是否部门经理 "
-          },
-          {
-            "id": "hiddenField",
-            "text": "input",
-            "value": "iszjl,isdgld,isbmjl"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input"
-          },
-          {
-            "id": "editField",
-            "text": "input"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input"
-          },
-          {
-            "id": "notNullField",
-            "text": "input"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span",
-            "value": {
-              "sendUsersName": "综合管理部/财务经理,综合管理部/内部员工/张丽莎,综合管理部/内部员工/孙彦",
-              "sendUsers": "TI=trye/OU=99630768,CN=A760049012/TI=121014/OU=99630768,CN=A594870971/TI=121014/OU=99630768",
-              "isSendNotice": "true"
-            }
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "uuid_6",
-        "name": "总经理审批",
-        "type": "people",
-        "shape": "img",
-        "number": "6",
-        "left": "408",
-        "top": "415",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "6"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "总经理审批"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "2"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "6"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input",
-            "value": "总经理审批意见"
-          },
-          {
-            "id": "ideaField",
-            "text": "input",
-            "value": "zjlspYJ"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea",
-            "value": "审批通过"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span",
-            "value": {
-              "selectStyle": "NS21",
-              "memberName": "公司领导/总经理",
-              "memberNumb": "TI=121001/OU=99630038",
-              "isDefaultPar": "false"
-            }
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input",
-            "value": "是否总经理,是否分管领导,是否部门经理 "
-          },
-          {
-            "id": "hiddenField",
-            "text": "input",
-            "value": "iszjl,isdgld,isbmjl"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input",
-            "value": "总经理审批意见"
-          },
-          {
-            "id": "editField",
-            "text": "input",
-            "value": "zjlspYJ"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input"
-          },
-          {
-            "id": "notNullField",
-            "text": "input"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "uuid_12",
-        "name": "财务复审",
-        "type": "people",
-        "shape": "img",
-        "number": "12",
-        "left": "408",
-        "top": "194",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "12"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "财务复审"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "2"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "4"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input",
-            "value": "财务复审意见"
-          },
-          {
-            "id": "ideaField",
-            "text": "input",
-            "value": "cwfsYJ"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span",
-            "value": {
-              "selectStyle": "NS01",
-              "memberName": "王燕",
-              "memberNumb": "A123876671",
-              "isDefaultPar": "true"
-            }
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input",
-            "value": "是否部门经理 ,是否分管领导,是否总经理"
-          },
-          {
-            "id": "hiddenField",
-            "text": "input",
-            "value": "isbmjl,isdgld,iszjl"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input",
-            "value": "借款金额（小写）,财务复审意见,送董事长审批"
-          },
-          {
-            "id": "editField",
-            "text": "input",
-            "value": "borrow_amount,cwfsYJ,IsSendDSZ"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input",
-            "value": "借款金额（小写）"
-          },
-          {
-            "id": "notNullField",
-            "text": "input",
-            "value": "borrow_amount"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "uuid_15",
-        "name": "执行环节",
-        "type": "people",
-        "shape": "img",
-        "number": "15",
-        "left": "235",
-        "top": "454",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "15"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "执行环节"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "2"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "8"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input",
-            "value": "执行人意见"
-          },
-          {
-            "id": "ideaField",
-            "text": "input",
-            "value": "zxryj"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span",
-            "value": {
-              "selectStyle": "NS21",
-              "memberName": "综合管理部/财务经理",
-              "memberNumb": "TI=trye/OU=99630768",
-              "isDefaultPar": "false"
-            }
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input"
-          },
-          {
-            "id": "hiddenField",
-            "text": "input"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input",
-            "value": "送董事长审批"
-          },
-          {
-            "id": "editField",
-            "text": "input",
-            "value": "IsSendDSZ"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input"
-          },
-          {
-            "id": "notNullField",
-            "text": "input"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "uuid_16",
-        "name": "董事长审批",
-        "type": "people",
-        "shape": "img",
-        "number": "16",
-        "left": "233",
-        "top": "605",
-        "width": "75",
-        "height": "70",
-        "property": [
-          {
-            "id": "n_p_id",
-            "text": "span",
-            "value": "16"
-          },
-          {
-            "id": "n_p_name",
-            "text": "input",
-            "value": "董事长审批"
-          },
-          {
-            "id": "disRemark",
-            "text": "input"
-          },
-          {
-            "id": "nodeType",
-            "text": "select",
-            "value": "2"
-          },
-          {
-            "id": "orderNumber",
-            "text": "input",
-            "value": "9"
-          },
-          {
-            "id": "isDisInList",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "subflowName",
-            "text": "input"
-          },
-          {
-            "id": "subflowId",
-            "text": "input"
-          },
-          {
-            "id": "postScript",
-            "text": "input"
-          },
-          {
-            "id": "isLock",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "requestNotion",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "ideaFieldName",
-            "text": "input",
-            "value": "董事长意见"
-          },
-          {
-            "id": "ideaField",
-            "text": "input",
-            "value": "dszyj"
-          },
-          {
-            "id": "ideaStyle",
-            "text": "radio",
-            "value": "4"
-          },
-          {
-            "id": "ideaInputStyle",
-            "text": "radio",
-            "value": "2"
-          },
-          {
-            "id": "ideaOpts",
-            "text": "textarea"
-          },
-          {
-            "id": "allowSelectFromAddr",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "orgName",
-            "text": "input"
-          },
-          {
-            "id": "orgid",
-            "text": "input"
-          },
-          {
-            "id": "participatorValues",
-            "text": "span",
-            "value": {
-              "selectStyle": "NS21",
-              "memberName": "公司领导/董事长",
-              "memberNumb": "TI=99630211/OU=99630038",
-              "isDefaultPar": "false"
-            }
-          },
-          {
-            "id": "etsPolicy",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "loadQuotieryName",
-            "text": "input"
-          },
-          {
-            "id": "isCollect",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "collectField",
-            "text": "input"
-          },
-          {
-            "id": "isAllowAuth",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllFieldEdit",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "hiddenFieldName",
-            "text": "input"
-          },
-          {
-            "id": "hiddenField",
-            "text": "input"
-          },
-          {
-            "id": "editFieldName",
-            "text": "input"
-          },
-          {
-            "id": "editField",
-            "text": "input"
-          },
-          {
-            "id": "notNullFieldName",
-            "text": "input"
-          },
-          {
-            "id": "notNullField",
-            "text": "input"
-          },
-          {
-            "id": "isLoop",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendRead",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSendCopy",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPushNote",
-            "text": "checkbox",
-            "value": "1111"
-          },
-          {
-            "id": "notifyLevel",
-            "text": "checkbox",
-            "value": "111"
-          },
-          {
-            "id": "isAllowReject",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowRejectToCreator",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "isAllowPigeonhole",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowIssuance",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowSeal",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowCreatenewdoc",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowPhoneHandle",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isAllowAppointNode",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isHandelBusiness",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "attachSettle",
-            "text": "checkbox",
-            "value": "11"
-          },
-          {
-            "id": "phoneEditFieldName",
-            "text": "input"
-          },
-          {
-            "id": "phoneEditField",
-            "text": "input"
-          },
-          {
-            "id": "limitTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "estimateTime",
-            "text": "input",
-            "value": "0"
-          },
-          {
-            "id": "awokeRemainTm",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "isJumpFroSamePar",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "messageConf",
-            "text": "textarea"
-          },
-          {
-            "id": "isSendOnFlowOver",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "noticeValues",
-            "text": "span"
-          },
-          {
-            "id": "partnodesValues",
-            "text": "input"
-          }
-        ]
-      }
-    ],
-    "lines": [
-      {
-        "id": "line_7",
-        "name": "line_7",
-        "type": "line",
-        "shape": "line",
-        "number": "7",
-        "from": "uuid_1_Right",
-        "to": "uuid_2_Left"
-      },
-      {
-        "id": "line_8",
-        "name": "line_8",
-        "type": "line",
-        "shape": "line",
-        "number": "8",
-        "from": "uuid_2_Right",
-        "to": "uuid_3_Left"
-      },
-      {
-        "id": "line_10",
-        "name": "line_10",
-        "type": "line",
-        "shape": "line",
-        "number": "10",
-        "from": "uuid_4_Bottom",
-        "to": "uuid_6_Top"
-      },
-      {
-        "id": "line_13",
-        "name": "line_13",
-        "type": "line",
-        "shape": "line",
-        "number": "13",
-        "from": "uuid_3_Bottom",
-        "to": "uuid_12_Top",
-        "property": [
-          {
-            "id": "l_p_id",
-            "text": "span",
-            "value": "line_13"
-          },
-          {
-            "id": "l_p_name",
-            "text": "input",
-            "value": "line_13"
-          },
-          {
-            "id": "conditionType",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "trandCondition",
-            "text": "input"
-          },
-          {
-            "id": "isDefaultTran",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "l_p_desc",
-            "text": "textarea"
-          },
-          {
-            "id": "conditionValues",
-            "text": "span"
-          },
-          {
-            "id": "trandCondition2",
-            "text": "input"
-          }
-        ]
-      },
-      {
-        "id": "line_14",
-        "name": "line_14",
-        "type": "line",
-        "shape": "line",
-        "number": "14",
-        "from": "uuid_12_Bottom",
-        "to": "uuid_4_Top"
-      },
-      {
-        "id": "line_17",
-        "name": "line_17",
-        "type": "line",
-        "shape": "line",
-        "number": "17",
-        "from": "uuid_6_Left",
-        "to": "uuid_15_Right",
-        "property": [
-          {
-            "id": "l_p_id",
-            "text": "span",
-            "value": "line_17"
-          },
-          {
-            "id": "l_p_name",
-            "text": "input",
-            "value": "line_17"
-          },
-          {
-            "id": "conditionType",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "trandCondition",
-            "text": "input"
-          },
-          {
-            "id": "isDefaultTran",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "l_p_desc",
-            "text": "textarea",
-            "value": "( sfty 不等于 'YES' )"
-          },
-          {
-            "id": "conditionValues",
-            "text": "span",
-            "value": {
-              "valuemx": {
-                "leftValueName": "sfty",
-                "leftValueId": "sfty",
-                "operators": "!=",
-                "rightValue": "'YES'"
-              }
-            }
-          },
-          {
-            "id": "trandCondition2",
-            "text": "input",
-            "value": "( sfty != 'YES' )"
-          }
-        ]
-      },
-      {
-        "id": "line_18",
-        "name": "line_18",
-        "type": "line",
-        "shape": "line",
-        "number": "18",
-        "from": "uuid_15_Bottom",
-        "to": "uuid_16_Top",
-        "property": [
-          {
-            "id": "l_p_id",
-            "text": "span",
-            "value": "line_18"
-          },
-          {
-            "id": "l_p_name",
-            "text": "input",
-            "value": "line_18"
-          },
-          {
-            "id": "conditionType",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "trandCondition",
-            "text": "input"
-          },
-          {
-            "id": "isDefaultTran",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "l_p_desc",
-            "text": "textarea",
-            "value": "( 送董事长审批 等于 'YES' )"
-          },
-          {
-            "id": "conditionValues",
-            "text": "span",
-            "value": {
-              "valuemx": {
-                "leftValueName": "送董事长审批",
-                "leftValueId": "IsSendDSZ",
-                "operators": "==",
-                "rightValue": "'YES'"
-              }
-            }
-          },
-          {
-            "id": "trandCondition2",
-            "text": "input",
-            "value": "( IsSendDSZ == 'YES' )"
-          }
-        ]
-      },
-      {
-        "id": "line_19",
-        "name": "line_19",
-        "type": "line",
-        "shape": "line",
-        "number": "19",
-        "from": "uuid_16_Right",
-        "to": "uuid_5_Left"
-      },
-      {
-        "id": "line_20",
-        "name": "line_20",
-        "type": "line",
-        "shape": "line",
-        "number": "20",
-        "from": "uuid_6_Bottom",
-        "to": "uuid_16_Right",
-        "property": [
-          {
-            "id": "l_p_id",
-            "text": "span",
-            "value": "line_20"
-          },
-          {
-            "id": "l_p_name",
-            "text": "input",
-            "value": "line_20"
-          },
-          {
-            "id": "conditionType",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "trandCondition",
-            "text": "input"
-          },
-          {
-            "id": "isDefaultTran",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "l_p_desc",
-            "text": "textarea",
-            "value": "( 送董事长审批 等于 'YES'  并且 总经理是否同意 等于 'YES' )"
-          },
-          {
-            "id": "conditionValues",
-            "text": "span",
-            "value": {
-              "valuemx": [
-                {
-                  "leftValueName": "送董事长审批",
-                  "leftValueId": "IsSendDSZ",
-                  "operators": "==",
-                  "rightValue": "'YES'"
-                },
-                {
-                  "leftValueName": "总经理是否同意",
-                  "leftValueId": "sfty",
-                  "operators": "==",
-                  "rightValue": "'YES'"
-                }
-              ]
-            }
-          },
-          {
-            "id": "trandCondition2",
-            "text": "input",
-            "value": "( IsSendDSZ == 'YES'  && sfty == 'YES' )"
-          }
-        ]
-      },
-      {
-        "id": "line_21",
-        "type": "line",
-        "shape": "polyline",
-        "number": "21",
-        "from": "uuid_6_Bottom",
-        "to": "uuid_5_Top",
-        "polydot": [
-          {
-            "x": "493",
-            "y": "432.5"
-          },
-          {
-            "x": "493",
-            "y": "622.5"
-          }
-        ],
-        "property": [
-          {
-            "id": "l_p_id",
-            "text": "span"
-          },
-          {
-            "id": "l_p_name",
-            "text": "input"
-          },
-          {
-            "id": "conditionType",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "trandCondition",
-            "text": "input"
-          },
-          {
-            "id": "isDefaultTran",
-            "text": "radio",
-            "value": "1"
-          },
-          {
-            "id": "l_p_desc",
-            "text": "textarea",
-            "value": "( 总经理是否同意 等于 'YES'  并且 送董事长审批 不等于 'YES' )"
-          },
-          {
-            "id": "conditionValues",
-            "text": "span",
-            "value": {
-              "valuemx": [
-                {
-                  "leftValueName": "总经理是否同意",
-                  "leftValueId": "sfty",
-                  "operators": "==",
-                  "rightValue": "'YES'"
-                },
-                {
-                  "leftValueName": "送董事长审批",
-                  "leftValueId": "IsSendDSZ",
-                  "operators": "!=",
-                  "rightValue": "'YES'"
-                }
-              ]
-            }
-          },
-          {
-            "id": "trandCondition2",
-            "text": "input",
-            "value": "( sfty == 'YES'  && IsSendDSZ != 'YES' )"
-          }
-        ]
-      },
-      {
-        "id": "line_22",
-        "name": "line_22",
-        "type": "line",
-        "shape": "polyline",
-        "number": "22",
-        "from": "uuid_15_Right",
-        "to": "uuid_5_Top",
-        "polydot": {
-          "x": "439.5",
-          "y": "471.5"
         },
-        "property": [
-          {
-            "id": "l_p_id",
-            "text": "span",
-            "value": "line_22"
-          },
-          {
-            "id": "l_p_name",
-            "text": "input",
-            "value": "line_22"
-          },
-          {
-            "id": "conditionType",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "trandCondition",
-            "text": "input"
-          },
-          {
-            "id": "isDefaultTran",
-            "text": "radio",
-            "value": "0"
-          },
-          {
-            "id": "l_p_desc",
-            "text": "textarea",
-            "value": "( 送董事长审批 不等于 'YES' )"
-          },
-          {
-            "id": "conditionValues",
-            "text": "span",
-            "value": {
-              "valuemx": {
-                "leftValueName": "送董事长审批",
-                "leftValueId": "IsSendDSZ",
-                "operators": "!=",
-                "rightValue": "'YES'"
-              }
+        {
+          "groupId": "tab2",
+          "controls": {
+            "time": {
+              "value": "2018-09-08"
+            },
+            "city": {
+              "value": "Shenzhen"
             }
-          },
-          {
-            "id": "trandCondition2",
-            "text": "input",
-            "value": "( IsSendDSZ != 'YES' )"
           }
-        ]
-      }
-    ]
-  }
+        }
+      ]
+    },
+    {
+      "id": "uuid_2",
+      "name": "经办人所在部门经理审核",
+      "type": "people",
+      "number": "2",
+      "left": "256",
+      "top": "77",
+      "width": "75",
+      "height": "70",
+      "properties": []
+    },
+    {
+      "id": "uuid_3",
+      "name": "财务审核",
+      "type": "people",
+      "number": "3",
+      "left": "408",
+      "top": "77",
+      "width": "75",
+      "height": "70",
+      "properties": []
+    },
+    {
+      "id": "uuid_4",
+      "name": "分管副总审批",
+      "type": "people",
+      "number": "4",
+      "left": "408",
+      "top": "307",
+      "width": "75",
+      "height": "70",
+      "properties": []
+    },
+    {
+      "id": "uuid_5",
+      "name": "结束",
+      "type": "end",
+      "number": "5",
+      "left": "402",
+      "top": "605",
+      "width": "75",
+      "height": "70",
+      "properties": []
+    },
+    {
+      "id": "uuid_6",
+      "name": "总经理审批",
+      "type": "people",
+      "number": "6",
+      "left": "408",
+      "top": "415",
+      "width": "75",
+      "height": "70",
+      "properties": []
+    },
+    {
+      "id": "uuid_12",
+      "name": "财务复审",
+      "type": "people",
+      "number": "12",
+      "left": "408",
+      "top": "194",
+      "width": "75",
+      "height": "70",
+      "properties": []
+    },
+    {
+      "id": "uuid_15",
+      "name": "执行环节",
+      "type": "people",
+      "number": "15",
+      "left": "235",
+      "top": "454",
+      "width": "75",
+      "height": "70",
+      "properties": []
+    },
+    {
+      "id": "uuid_16",
+      "name": "董事长审批",
+      "type": "people",
+      "number": "16",
+      "left": "233",
+      "top": "605",
+      "width": "75",
+      "height": "70",
+      "properties": [
+        {
+          "id": "n_p_id",
+          "text": "span",
+          "value": "16"
+        },
+        {
+          "id": "n_p_name",
+          "text": "input",
+          "value": "董事长审批"
+        },
+        {
+          "id": "disRemark",
+          "text": "input"
+        },
+        {
+          "id": "nodeType",
+          "text": "select",
+          "value": "2"
+        },
+        {
+          "id": "orderNumber",
+          "text": "input",
+          "value": "9"
+        },
+        {
+          "id": "isDisInList",
+          "text": "radio",
+          "value": "1"
+        },
+        {
+          "id": "subflowName",
+          "text": "input"
+        },
+        {
+          "id": "subflowId",
+          "text": "input"
+        },
+        {
+          "id": "postScript",
+          "text": "input"
+        },
+        {
+          "id": "isLock",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "requestNotion",
+          "text": "radio",
+          "value": "1"
+        },
+        {
+          "id": "ideaFieldName",
+          "text": "input",
+          "value": "董事长意见"
+        },
+        {
+          "id": "ideaField",
+          "text": "input",
+          "value": "dszyj"
+        },
+        {
+          "id": "ideaStyle",
+          "text": "radio",
+          "value": "4"
+        },
+        {
+          "id": "ideaInputStyle",
+          "text": "radio",
+          "value": "2"
+        },
+        {
+          "id": "ideaOpts",
+          "text": "textarea"
+        },
+        {
+          "id": "allowSelectFromAddr",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "orgName",
+          "text": "input"
+        },
+        {
+          "id": "orgid",
+          "text": "input"
+        },
+        {
+          "id": "participatorValues",
+          "text": "span",
+          "value": {
+            "selectStyle": "NS21",
+            "memberName": "公司领导/董事长",
+            "memberNumb": "TI=99630211/OU=99630038",
+            "isDefaultPar": "false"
+          }
+        },
+        {
+          "id": "etsPolicy",
+          "text": "radio",
+          "value": "1"
+        },
+        {
+          "id": "loadQuotieryName",
+          "text": "input"
+        },
+        {
+          "id": "isCollect",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "collectField",
+          "text": "input"
+        },
+        {
+          "id": "isAllowAuth",
+          "text": "radio",
+          "value": "1"
+        },
+        {
+          "id": "isAllFieldEdit",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "hiddenFieldName",
+          "text": "input"
+        },
+        {
+          "id": "hiddenField",
+          "text": "input"
+        },
+        {
+          "id": "editFieldName",
+          "text": "input"
+        },
+        {
+          "id": "editField",
+          "text": "input"
+        },
+        {
+          "id": "notNullFieldName",
+          "text": "input"
+        },
+        {
+          "id": "notNullField",
+          "text": "input"
+        },
+        {
+          "id": "isLoop",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowSendRead",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowSendCopy",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowPushNote",
+          "text": "checkbox",
+          "value": "1111"
+        },
+        {
+          "id": "notifyLevel",
+          "text": "checkbox",
+          "value": "111"
+        },
+        {
+          "id": "isAllowReject",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowRejectToCreator",
+          "text": "radio",
+          "value": "1"
+        },
+        {
+          "id": "isAllowPigeonhole",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowIssuance",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowSeal",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowCreatenewdoc",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowPhoneHandle",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isAllowAppointNode",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isHandelBusiness",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "attachSettle",
+          "text": "checkbox",
+          "value": "11"
+        },
+        {
+          "id": "phoneEditFieldName",
+          "text": "input"
+        },
+        {
+          "id": "phoneEditField",
+          "text": "input"
+        },
+        {
+          "id": "limitTime",
+          "text": "input",
+          "value": "0"
+        },
+        {
+          "id": "estimateTime",
+          "text": "input",
+          "value": "0"
+        },
+        {
+          "id": "awokeRemainTm",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "isJumpFroSamePar",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "messageConf",
+          "text": "textarea"
+        },
+        {
+          "id": "isSendOnFlowOver",
+          "text": "radio",
+          "value": "0"
+        },
+        {
+          "id": "noticeValues",
+          "text": "span"
+        },
+        {
+          "id": "partnodesValues",
+          "text": "input"
+        }
+      ]
+    }
+  ],
+  "lines": [
+    {
+      "id": "line_7",
+      "name": "line_7",
+      "type": "line",
+      "number": "7",
+      "from": "uuid_1_Right",
+      "to": "uuid_2_Left",
+      "properties": [
+        {
+          "groupId": "tab1",
+          "controls": {
+            "name": {
+              "value": "流转"
+            },
+            "execute": {
+              "value": "true"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "line_8",
+      "name": "line_8",
+      "type": "line",
+      "number": "8",
+      "from": "uuid_2_Right",
+      "to": "uuid_3_Left"
+    },
+    {
+      "id": "line_10",
+      "name": "line_10",
+      "type": "line",
+      "number": "10",
+      "from": "uuid_4_Bottom",
+      "to": "uuid_6_Top"
+    },
+    {
+      "id": "line_13",
+      "name": "line_13",
+      "type": "line",
+      "number": "13",
+      "from": "uuid_3_Bottom",
+      "to": "uuid_12_Top",
+      "properties": []
+    },
+    {
+      "id": "line_14",
+      "name": "line_14",
+      "type": "line",
+      "number": "14",
+      "from": "uuid_12_Bottom",
+      "to": "uuid_4_Top"
+    },
+    {
+      "id": "line_17",
+      "name": "line_17",
+      "type": "line",
+      "number": "17",
+      "from": "uuid_6_Left",
+      "to": "uuid_15_Right",
+      "properties": []
+    },
+    {
+      "id": "line_18",
+      "name": "line_18",
+      "type": "line",
+      "number": "18",
+      "from": "uuid_15_Bottom",
+      "to": "uuid_16_Top",
+      "properties": []
+    },
+    {
+      "id": "line_19",
+      "name": "line_19",
+      "type": "line",
+      "number": "19",
+      "from": "uuid_16_Right",
+      "to": "uuid_5_Left",
+      "properties": []
+    },
+    {
+      "id": "line_20",
+      "name": "line_20",
+      "type": "line",
+      "number": "20",
+      "from": "uuid_6_Bottom",
+      "to": "uuid_16_Right",
+      "properties": []
+    },
+    {
+      "id": "line_21",
+      "type": "line",
+      "number": "21",
+      "from": "uuid_6_Bottom",
+      "to": "uuid_5_Top",
+      "properties": []
+    },
+    {
+      "id": "line_22",
+      "name": "line_22",
+      "type": "line",
+      "number": "22",
+      "from": "uuid_15_Right",
+      "to": "uuid_5_Top",
+      "properties": []
+    }
+  ]
 }

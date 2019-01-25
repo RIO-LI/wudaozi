@@ -7,12 +7,19 @@ $(function () {
                 height: document.documentElement.clientHeight
             });
         }).trigger('resize');
-        $.ajax({
-            url: 'test/data.json?' + new Date().getTime()
-        }).then(function (data) {
-            console.log(data);
+        $.when(
+            $.ajax({
+                url: 'test/shapes-config.json?' + new Date().getTime()
+            }),
+            $.ajax({
+                url: 'test/data.json?' + new Date().getTime()
+            })
+        ).done(function (shapesConfigData, data) {
+            shapesConfigData = shapesConfigData[0];
+            data = data[0];
             Wudaozi.init({
                 designer: '#designer_viewport',
+                shapes: shapesConfigData,
                 toolbar: {
                     el: '#shape_panel',
                     actions: {
@@ -31,9 +38,8 @@ $(function () {
                             console.log(event, ctx, data);
                         }
                     }, {
-                        text: '文本B', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
-
-                            alert(1);
+                        text: '编辑', id: 'a', icon: 'glyphicon-chevron-right', action: function (event, ctx, data) {
+                            ctx.$$configProperty.show(data);
                         }
                     }, {
                         text: '文本C', id: 'a', icon: 'glyphicon-chevron-right', action: function () {
@@ -75,7 +81,7 @@ $(function () {
                         }
                     }
                 },
-                data: data.root
+                data: data
             });
         });
     };
