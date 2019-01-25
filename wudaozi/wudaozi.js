@@ -435,6 +435,7 @@
                     }
                 });
             //监听jsPlumb节点链接时的事件
+            // TODO 目前还没有做两个节点在同一方向重复连线的问题,如果有重复连线应该不响应绘制
             jsPlumb.bind('connection', function (info, originalEvent) {
                 var desc = {
                     from: info.sourceId + '_' + info.sourceEndpoint.anchor.type,
