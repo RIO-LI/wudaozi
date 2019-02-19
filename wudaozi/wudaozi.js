@@ -79,7 +79,8 @@
    * 
    * ========================================================================
    */
-    var uuid = 0;
+    jsPlumb.init(); // 强行调用使完成jsPlumb，避免因jsPlumb一些内部初始化未完成造成的bug;
+    var uuid = new Date().getTime();
     var hasInit = false;
     var Wudaozi = {
         // 插件缓存对象
@@ -141,22 +142,22 @@
                 isSource: true, // 是否可以拖动（作为连线起点）
                 connector: ['Flowchart', { gap: 8, cornerRadius: 5, alwaysRespectStubs: true }],  // 连接线的样式种类有[Bezier],[Flowchart],[StateMachine ],[Straight ]
                 isTarget: true, // 是否可以放置（连线终点）
-                maxConnections: -1, // 设置连接点最多可以连接几条线
+                maxConnections: 999, // 设置连接点最多可以连接几条线
                 connectorOverlays: [
+                    // ['Arrow', {
+                    //     width: 20,
+                    //     length: 15,
+                    //     location: 1
+                    // }],
+                    // ['Arrow', {
+                    //     width: 20,
+                    //     length: 15,
+                    //     location: 0.2
+                    // }],
                     ['Arrow', {
                         width: 20,
                         length: 15,
-                        location: 1
-                    }],
-                    ['Arrow', {
-                        width: 20,
-                        length: 15,
-                        location: 0.2
-                    }],
-                    ['Arrow', {
-                        width: 20,
-                        length: 15,
-                        location: 0.7
+                        location: 0.97
                     }]
                 ]
             }
@@ -272,6 +273,7 @@
          * 清空画图板中的内容
          */
         clearDesignerViewport: function () {
+            jsPlumb.deleteEveryConnection();
             this.$designer
                 .find('#canvas_container')
                 .siblings()
@@ -487,12 +489,15 @@
                 $(el).off('click', '[data-action]')
                     .on('click', '[data-action]', function (e) {
                         var $target = $(e.target);
+                        var action = $target.attr('data-action');
                         var type = $target.attr('data-type') || 'common';
-                        var action = $target.attr('data-action') || 'add';
-                        that._crrentSelectToAddDetails = {
-                            type: type,
-                            action: action
-                        };
+                        if (action == 'add') {
+                            that._crrentSelectToAddDetails = {
+                                type: type,
+                                action: action
+                            };
+                        }
+
                         var fn = that.getField(that.initConfig, 'toolbar.actions.' + action, function () { });
                         fn.apply(null, [e, that]);
                     });
@@ -582,7 +587,7 @@
                 'data-id': id
             }).appendTo(this.$designer);
             ['Top', 'Bottom', 'Left', 'Right'].forEach(function (direction) {
-                var config = $.extend(true, this.visoConfig.lineStyle);
+                var config = $.extend(true, {}, this.visoConfig.lineStyle);
                 if (desc.type == 'end') {
                     config.isSource = false;
                 }
@@ -624,13 +629,10 @@
          * @param {{from: string, to: string}} desc 数据描述对象 
          */
         deleteLine: function (desc) {
-            var connector = (jsPlumb.getAllConnections() || []).map(function (connection) {
-                if (connection && connection.endpoints) {
-
-                    return connection.endpoints || [];
-                }
-                return [];
-            }).filter(function (endpoints) {
+            var sourceId = desc.from.replace(/[_a-zA-Z]+$/gi, '');
+            var targetId = desc.to.replace(/[_a-zA-Z]+$/gi, '');
+            var connector = (jsPlumb.getConnections({ source: sourceId, target: targetId }) || []).filter(function (connection) {
+                var endpoints = connection.endpoints;
                 var fromAnchor = endpoints[0]['anchor'];
                 var toAnchor = endpoints[1]['anchor'];
                 var fromAnchorId = fromAnchor.elementId + '_' + fromAnchor.type;
@@ -638,10 +640,7 @@
                 return desc.from == fromAnchorId && desc.to == toAnchorId;
             });
             if (connector.length > 0) {
-                var ctr = connector[0];
-                if (ctr[0]['connections'][0] == ctr[1]['connections'][0]) {
-                    jsPlumb.deleteConnection(ctr[0]['connections'][0]);
-                }
+                jsPlumb.deleteConnection(connector[0]);
             }
             return this;
         },
@@ -674,26 +673,19 @@
         },
         /**
          * 获取所有链接线的数据
-         * @returns {Array<{from: string, to: string}>}
+         * @returns {Array<{from: string, to: string, shapeConfig: {properties: Array<any>}, type: string}>}
          */
         getAllLinesData: function () {
-            var data = (jsPlumb.getAllConnections() || []).map(function (connection) {
-                if (connection && connection.endpoints) {
-
-                    return connection.endpoints || [];
-                }
-                return [];
-            }).map(function (endpoints) {
-                return endpoints[0].connections[0].desc;
+            return (jsPlumb.getAllConnections() || []).map(function (connection) {
+                return connection.desc;
             });
-            return data;
         },
         /**
          * 获取当前状态的数据
          * @returns {lines: Array, nodes: Array}
          */
         getAllData: function () {
-            return $.extend(true, {}, this.initConfig.data, { nodes: this.getAllNodesData(), lines: this.getAllLinesData() });
+            return { nodes: this.getAllNodesData(), lines: this.getAllLinesData() };
         },
         /**
          * 获取选择器对应的元素的几何信息

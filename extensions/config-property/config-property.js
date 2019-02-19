@@ -134,10 +134,12 @@
                     show: $.noop,
                     shown: $.noop,
                     hide: $.noop,
-                    hidden: $.noop
+                    hidden: $.noop,
+                    save: $.noop
                 }
             }, w.initConfig.configProperty);
             this.$modal = $(modalTpl).appendTo('body').modal(config.modal);
+            this.$modal.data('config', config);
             this._initEvent();
             return this;
         },
@@ -152,8 +154,23 @@
             this.$modal
                 .off('click', '[data-action="save"]')
                 .on('click', '[data-action="save"]', function (e) {
+                    var config = that.$modal.data('config');
+                    var saveFn = that.$$w.getField(config, 'action.save');
                     that.updateData();
-                    that.hide();
+                    if ($.isFunction(saveFn)) {
+                        var res = saveFn.apply(null, [e, that.$$w]);
+                        if (res && res.then) {
+                            res.then(function () {
+                                that.hide();
+                            }).catch(function () {
+                                that.hide();
+                            });
+                        } else {
+                            that.hide();
+                        }
+                    } else {
+                        that.hide();
+                    }
                 });
             return this;
         },
@@ -198,6 +215,7 @@
                 var $el = $('#' + id);
                 $el.data('desc', $.extend(true, {}, desc, this.data.desc));
             }
+            return this;
         },
         /**
          * 获取所有标签页的数据
