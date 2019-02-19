@@ -59,7 +59,7 @@ $(function () {
                             },
                             clear: function (event, ctx) {
                                 ctx.clearDesignerViewport();
-                                localStorage.clear();
+                                localStorage.removeItem('data');
                             }
                         }
                     },
